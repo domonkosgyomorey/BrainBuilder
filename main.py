@@ -1,4 +1,5 @@
 import numpy as np
+from enum import Enum
 
 class Dense():
     def __init__(self, inputs, outputs) -> None:
@@ -24,9 +25,29 @@ class Activation():
 
     leaky_relu_coef = 0.0
 
-    def __init__(self, activation_fn, activation_fn_der) -> None:
-        self._act_fn = activation_fn
-        self._act_fn_der = activation_fn_der
+    class ActivationType(Enum):
+        ReLU = 1,
+        Sigmoid = 2,
+        TanH = 3,
+        LeakyReLU = 4,
+        Softmax = 5
+
+    def __init__(self, activation_type: ActivationType) -> None:
+        if activation_type == Activation.ActivationType.ReLU:
+            self._act_fn = Activation.relu
+            self._act_fn_der = Activation.relu_derivative
+        elif activation_type == Activation.ActivationType.Sigmoid:
+            self._act_fn = Activation.sigmoid
+            self._act_fn_der = Activation.sigmoid_derivative
+        elif activation_type == Activation.ActivationType.TanH:
+            self._act_fn = Activation.tanh
+            self._act_fn_der = Activation.tanh_derivative
+        elif activation_type == Activation.ActivationType.LeakyReLU:
+            self._act_fn = Activation.leaky_relu
+            self._act_fn_der = Activation.leaky_relu_derivative
+        elif activation_type == Activation.ActivationType.Softmax:
+            self._act_fn = Activation.softmax
+            self._act_fn_der = Activation.softmax_derivative
         self._last_input = 0
 
     def feedforward(self, x):
@@ -49,7 +70,7 @@ class Activation():
         return max(0, x)
     
     def relu_derivative(x) -> np.float32:
-        return 0 if x<=0 else 1
+        return [[0] if c<=0 else [1] for c in x]
 
     def tanh(x) -> np.float32:
         return np.tanh(x)
@@ -61,7 +82,7 @@ class Activation():
         return max(Activation.leaky_relu_coef*x, x)
     
     def leaky_relu_derivative(x) -> np.float32:
-        return Activation.leaky_relu_coef if x <= 0 else 1
+        return [[Activation.leaky_relu_coef] if c <= 0 else [1] for c in x]
 
     def softmax(xs: np.ndarray):
         shiftx = xs - np.max(xs)
@@ -83,9 +104,9 @@ def main():
     xor_y = np.array([[0], [1], [1], [0]], dtype=np.float32)
 
     l1 = Dense(2, 2)
-    l2 = Activation(Activation.sigmoid, Activation.sigmoid_derivative)
+    l2 = Activation(Activation.ActivationType.Sigmoid)
     l3 = Dense(2, 1)
-    l4 = Activation(Activation.sigmoid, Activation.sigmoid_derivative)
+    l4 = Activation(Activation.ActivationType.Sigmoid)
 
     for it in range(1, 10000):
         for i, train_sample in enumerate(xor_x):
@@ -97,9 +118,9 @@ def main():
             #train
             xi = np.array(loss_derivative(result, xor_y[i], 2)).reshape((1, 1))
             xi = l4.learn(xi)
-            xi = l3.learn(0.5, xi)
+            xi = l3.learn(5, xi)
             xi = l2.learn(xi)
-            l1.learn(0.5, xi)
+            l1.learn(5, xi)
 
     for train_sample in xor_x:
             result = l4.feedforward(l3.feedforward(l2.feedforward(l1.feedforward(train_sample))))
