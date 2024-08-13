@@ -7,7 +7,7 @@ A python library for machine learning written from skratch
 - numpy
 
 # Implemented features
-- basic implementation for a dense layer
+- ✅ basic implementation for a dense layer
 - ✅ activation layer
     - ✅ ReLU
     - ✅ Sigmoid
