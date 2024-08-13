@@ -6,15 +6,17 @@ A python library for machine learning written from skratch
 # Library dependencies
 - numpy
 
-# Plan for the future
+# Implemented features
 - basic implementation for a dense layer
+- ✅ activation layer
+    - ✅ ReLU
+    - ✅ Sigmoid
+    - ✅ Tanh
+    - ✅ Leaky ReLU
+    - ❌ Softmax
+
+# Plan for the future
 - generic backpropagation algorithm
-- activation layer
-    - ReLU
-    - Sigmoid
-    - Tanh
-    - Leaky ReLU
-    - Softmax
 - convolution layer ( built in flattern )
 - dropout layer
 - pooling layer
