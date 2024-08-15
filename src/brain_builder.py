@@ -39,5 +39,5 @@ class BrainBuilder:
 
     def predict(self, datas, labels):
         for i, data in enumerate(datas):
-            res = np.round(self.feedforward(data))
+            res = self.feedforward(data)
             print(labels[i].T, " => ", res.T)
