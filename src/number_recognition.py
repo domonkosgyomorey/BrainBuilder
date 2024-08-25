@@ -21,13 +21,13 @@ img_labels = np.array(img_labels)
 img_datas = np.array(img_datas)
 
 image_brain = BrainBuilder([
-        Dense(28*28, 28),
+        Dense(28*28, 5),
         Activation(Activation.ActivationType.Sigmoid),
-        Dense(28, 5),
+        Dense(5, 5),
         Activation(Activation.ActivationType.Sigmoid),
         Dense(5, 4),
         Activation(Activation.ActivationType.Sigmoid)
     ], np.float32(0.1), Loss.LossType.MSE)
 
-image_brain.train(1000, img_datas, img_labels)
+image_brain.train(2000, img_datas, img_labels)
 image_brain.predict(img_datas, img_labels)

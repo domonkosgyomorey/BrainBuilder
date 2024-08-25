@@ -16,7 +16,7 @@ class Dense(ILayer):
     def __init__(self, inputs, outputs) -> None:
         self._input_len = inputs
         self._output_len = outputs
-        self._weights = np.random.randn(outputs, inputs)
+        self._weights = np.random.randn(outputs, inputs) * np.sqrt(2. / inputs)
         self._last_input = np.array([[0.0], [0.0]], dtype=np.float32)
         self._bias = np.random.randn(outputs, 1)
 
@@ -33,19 +33,20 @@ class Dense(ILayer):
 
 
 def sigmoid(x):
-    return 1.0/(1.0+np.exp(-x))
+    return 1.0 / (1.0 + np.exp(-np.clip(x, -500, 500)))
 
 
 def sigmoid_derivative(x):
-    return sigmoid(x)*(1.0 - sigmoid(x))
+    s = sigmoid(x)
+    return s * (1 - s)
+
 
 
 def relu(x):
-    return [[max(0, c)] for c in x ]
-
+    return np.maximum(0, x)
 
 def relu_derivative(x):
-    return [[0] if c<=0 else [1] for c in x]
+    return np.where(x > 0, 1, 0)
 
 
 def tanh(x):
@@ -57,7 +58,7 @@ def tanh_derivative(x):
 
 
 def leaky_relu(x):
-    return [[max(Activation.leaky_relu_coef*x, x)] for c in x ]
+    return [[max(Activation.leaky_relu_coef * c, c)] for c in x]
 
 def leaky_relu_derivative(x):
     return [[Activation.leaky_relu_coef] if c <= 0 else [1] for c in x]
@@ -65,7 +66,7 @@ def leaky_relu_derivative(x):
 
 class Activation(ILayer):
 
-    leaky_relu_coef = 0.0
+    leaky_relu_coef = 0.1
 
     class ActivationType(Enum):
         ReLU = 1,
