@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainBuilder", "BrainBuilder\BrainBuilder.csproj", "{9775DEAB-AF8B-401C-8E37-CE8700928950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrainBuilder.Testing", "BrainBuilder.Testing\BrainBuilder.Testing.csproj", "{D62858A9-91C5-4A95-99D4-06AE8AAC9D27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9775DEAB-AF8B-401C-8E37-CE8700928950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9775DEAB-AF8B-401C-8E37-CE8700928950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9775DEAB-AF8B-401C-8E37-CE8700928950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9775DEAB-AF8B-401C-8E37-CE8700928950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62858A9-91C5-4A95-99D4-06AE8AAC9D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62858A9-91C5-4A95-99D4-06AE8AAC9D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62858A9-91C5-4A95-99D4-06AE8AAC9D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62858A9-91C5-4A95-99D4-06AE8AAC9D27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5BC387B-A8DD-414A-AFD6-F4AABC851890}
+	EndGlobalSection
+EndGlobal
